@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>kick start IT</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Oxygen);
+
+      body { font-family: 'Oxygen'; }
+      h1 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+        line-height: 0.8em;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        -moz-border-radius: 5px;
+        -web-border-radius: 5px;
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #999999;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 50%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h1:last-of-type, .left-column h2:last-of-type, .left-column h3:last-child {
+        }
+      .right-column {
+        width: 50%;
+        float: right;
+        padding-top: 1em;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+# Virtualization Environments
+
+####Filipp Frizzy
+
+####filipp.s.frizzy@gmail.com
+
+.footnote[[*all pink lettering clickable](https://github.com/Friz-zy)]
+---
+class: inverse
+# Agenda
+.left-column[
+#### [Virtual Machines](https://friz-zy.github.io/presentations/vm-review/slides.html#3)
+
+#### [Containers](https://friz-zy.github.io/presentations/vm-review/slides.html#5)
+
+#### [Security Enclaves](https://friz-zy.github.io/presentations/vm-review/slides.html#8)
+]
+---
+class: inverse
+# .center[Virtual Machines History]
+
+.left-column[
+* 1964 Multics OS  
+разделение памяти и других системных ресурсов между пользователями
+
+* 1965 IBM System/360  
+обратная совместимость, несколько пользователей
+
+* 1968 IBM CP/CMS  
+позволял каждому пользователю иметь свою собственную полную операционную систему
+]
+
+.right-column[
+* 1987 SoftPC
+запуск MS-DOS программ на Unix,
+позже добавлена поддержка Windows и Mac
+
+* 1997 Virtual PC от Apple
+
+* 1998 основана VMWare  
+сейчас они лидер рынка
+
+* 2005 Intel и AMD добавляют в cpu дополнительную поддержку для виртуализации
+]
+---
+class: center, inverse
+# .center[Virtual Machines]
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Kernel-based_Virtual_Machine.svg/1280px-Kernel-based_Virtual_Machine.svg.png" alt="KVM" width="400"/>
+---
+class: inverse
+# .center[Containers History]
+
+.left-column[
+* 1979 в Unix V7 добавлен chroot
+
+* 2000 в FreeBSD 4 добавлены Jails
+
+* 2001 Linux VServer пытается повторить Jails в виде патча для ядра Linux
+
+* 2004 Solaris Containers
+
+* 2005 Open VZ (Open Virtuzzo) в виде патча для ядра Linux
+
+* 2006 Control Groups для Linux от google (CPU, memory, disk I/O, network)
+
+* 2008 LinuX Containers в ядре (cgroups + namespaces)
+
+]
+
+.right-column[
+* 2013 Docker  
+LXC + disk image management
+
+* 2014 Kubernetes от Google  
+оркестратор для тысяч контейнеров в датацентре
+
+* 2015 Cloud Native Computing Foundation (CNCF)  
+единый стандарт на базе docker, внедрение в облака,
+стандарт решения для хранилища, общей сети, оркестрации
+
+* 2016 DevOpsSec
+
+* 2018 Kubernetes как единый стандарт в отрасли
+]
+---
+class: center, inverse
+
+# Containers
+
+<img src="https://static.1cloud.ru/img/blog/509.png" alt="Containers" width="400"/>
+
+<img src="https://q15928.github.io/img/2021-01-09-docker2.png" alt="Docker" width="500"/>
+
+---
+class: center, inverse
+
+# Containers in Clouds
+
+<img src="https://containerd.io/img/architecture.png" alt="Containers" width="700"/>
+
+---
+class: inverse
+
+# .center[Security Enclaves]
+
+.left-column[
+#### Идея
+Обеспечить изоляцию на уровне CPU и зашифрованной памяти.
+С дополнительным софтом анклав так же может зашифровать диск и сетевую активность.
+]
+
+.right-column[
+#### Свойства
+* Конфиденциальность
+* Целостность
+* Аттестация
+]
+---
+class: inverse
+
+# .center[Security Enclaves]
+
+#### Реализации CPU
+* [Intel Software Guard Extensions](https://en.wikipedia.org/wiki/Software_Guard_Extensions)  
+Использует разграничение на уровне памяти пользовательских процессов
+* [AMD SEV-SNP](https://developer.amd.com/sev/)  
+Использует разграничение на уровне виртуальных машин поверх гипервизора
+* [ARM Trusted Zone](https://www.arm.com/technologies/trustzone-for-cortex-a) и [ARM Confidential Compute Architecture](https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture)  
+([Apple Secure Enclave](https://support.apple.com/ru-ru/guide/security/sec59b0b31ff/web), [Samsung Knox](https://www.samsungknox.com/en), etc...)  
+Trusted Zone разграничивает память по модели Intel, CCA оперирует виртуальными машинами по модели AMD
+* [IBM Secure Execution on z/Architecture](https://www.ibm.com/docs/en/linux-on-systems?topic=linux-introduction)  
+Анклавы поверх Linux KVM на базе IMB Z мэинфрэймов
+
+#### Реализация GPU
+* [Nvidia Confidential Computing](https://www.nvidia.com/en-us/data-center/solutions/confidential-computing/)  
+Безопасно пристегивает Nvidia GPU к уже существующему анклаву поверх CPU. Microsoft Azure Cloud уже поддерживает.
+
+
+---
+class: inverse
+
+# .center[Security Enclaves]
+
+#### Открытые реализации
+* [ConfidentialComputing](https://confidentialcomputing.io/projects/)  
+Консорциум под крылом Linux Foundation
+* [Keystone](https://keystone-enclave.org/)  
+Совместный аппаратный анклав с открытым исходным кодом на основе RISC-V
+* [Open Enclave SDK](https://openenclave.io/sdk/)  
+Пакет для создания на С\С++ своих реализаций анклавов поверх уже существующего железа (Intel, AMD, ARM)
+* [EGo SDK](https://ego.dev/)  
+Пакет для создания на GO своих реализаций анклавов поверх уже существующего железа
+* [Intel SGX SDK](https://01.org/intel-softwareguard-extensions)  
+Пакет от интел под их платформу
+* [Confidential Consortium Framework](Confidential Consortium Framework)  
+Блокчейн поверх (Microsoft) Azure enclaves (Intel & AMD based)
+---
+class: center, inverse
+
+# AMD based Security Enclaves
+
+<img src="https://miro.medium.com/max/1400/1*kbKiiAxhBcPYDIrLgXDBDQ.webp" alt="AMD Enclave Memory" width="500"/>
+
+Как показано на архитектуре SEV, она опирается на гипервизор для выполнения функций виртуализации, таких как эмуляция устройств и планирование виртуальных машин, но делегирует операции безопасности защищенному процессору через безопасно управляемые API. Чтобы защитить гостевую виртуальную машину с поддержкой SEV, прошивка SEV помогает реализовать основные свойства безопасности: подлинность платформы , удаленную аттестацию запущенного гостя, конфиденциальность и целостность используемых гостевых данных.
+
+---
+class: center, inverse
+
+# Intel based Security Enclaves
+
+<img src="https://miro.medium.com/max/478/0*Oi321cnqd85TcYoi.webp" alt="Intel Enclave Memory" width="300"/>
+
+Intel Software Guard Extensions ( SGX ) использует набор выделенных инструкций безопасного шлюза, чтобы позволить коду пользовательского процесса определять частные области памяти для безопасного анклава SGX , изолируя его от других ненадежных процессов (в отличии от виртуальных машин от AMD и IBM).
+---
+class: center, middle, inverse
+
+<img src="https://www.meme-arsenal.com/memes/8fe08cdeeff37ce24ee5a2217a76607e.jpg" alt="Intel Enclave Memory" width="600"/>
+---
+class: inverse
+
+# .center[Security Enclaves]
+
+### Ссылки на почитать
+
+#### CPU
+* https://medium.com/@zlhk100/confidential-computing-solution-case-studies-intel-sgx-amd-sev-snp-and-arm-cca-comparison-b29d53401f77
+* https://learn.microsoft.com/en-us/azure/confidential-computing/enclave-aware-containers
+* https://caslab.csl.yale.edu/workshops/hasp2018/HASP18_a9-mofrad_slides.pdf
+* https://www.blackhat.com/docs/us-16/materials/us-16-Mandt-Demystifying-The-Secure-Enclave-Processor.pdf
+
+---
+class: inverse
+
+# .center[Security Enclaves]
+
+### Ссылки на почитать
+
+#### GPU
+* https://www.usenix.org/system/files/osdi18-volos.pdf
+* https://marksilberstein.com/wp-content/uploads/2020/04/systex16sgx.pdf
+* https://keystone-enclave.org/workshop-website-2018/slides/Stavros_Microsoft_Confidential_Accelerators.pdf
+
+---
+class: inverse
+
+# .center[Security Enclaves]
+
+### Ссылки на почитать
+
+#### компании, кто уже использует технологию анклавов
+
+* https://blog.mithrilsecurity.io/our-roadmap-at-mithril-security/
+* https://medium.com/oasislabs/towards-an-open-source-secure-enclave-659ac27b871a
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
